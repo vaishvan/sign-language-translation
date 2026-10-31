@@ -32,18 +32,19 @@ discarded**: encoder layers 2..N never see it. We feed the LID-CTC posterior
 back into the residual stream before the Sign2Text layers. This is the
 self-conditioned CTC idea from Nozaki & Komatsu (Interspeech 2021):
 
-$$
-\begin{aligned}
-Z &= \operatorname{softmax}\!\left(W_{\text{lid}}\, h_{\text{int}}\right) && \in \mathbb{R}^{B \times |F| \times V_{\text{lid}}} \quad \text{(already computed in the paper)} \\
-h_{\text{int}}' &= h_{\text{int}} + g \cdot W_c Z, \qquad g = \sigma(a) && \textbf{NEW: } W_c \in \mathbb{R}^{d \times V_{\text{lid}}},\ a \text{ a scalar gate} \\
-h_{\text{fin}} &= \operatorname{Enc}_{2..N}\!\left(h_{\text{int}}'\right) && \text{unchanged}
-\end{aligned}
-$$
+$$Z = \mathrm{softmax}\left(W_{\text{lid}}\, h_{\text{int}}\right) \in \mathbb{R}^{B \times |F| \times V_{\text{lid}}}$$
 
-Here $\sigma$ is the sigmoid, $B$ the batch size, $|F|$ the number of frames and
-$V_{\text{lid}} = 14$ the LID vocabulary size.
+$$h_{\text{int}}' = h_{\text{int}} + g \cdot W_c Z, \qquad g = \sigma(a)$$
 
-Everything else is identical to the paper: losses, $ambda$, decoder and decoding.
+$$h_{\text{fin}} = \mathrm{Enc}_{2..N}\left(h_{\text{int}}'\right)$$
+
+- $Z$ is the LID-CTC posterior, which the paper already computes.
+- **New:** $W_c \in \mathbb{R}^{d \times V_{\text{lid}}}$ and the scalar gate $a$.
+- $h_{\text{fin}}$ is computed exactly as in the paper.
+- $\sigma$ is the sigmoid, $B$ the batch size, $|F|$ the number of frames and
+  $V_{\text{lid}} = 14$ the LID vocabulary size.
+
+Everything else is identical to the paper: losses, $\lambda$, decoder and decoding.
 The conditioner adds **3,585 parameters** ($14 \times 256 + 1$), about 0.02% of our
 18.56M-parameter baseline. That is too small for any gain to come from extra
 capacity.
