@@ -108,8 +108,8 @@ sacrebleu 2.6.0, Python 3.12). To match them exactly, use
 no CUDA requirement: all reported runs used the Apple MPS backend.
 
 ```bash
-git clone https://github.com/joffinkoshy/Multilingual-Gloss-free-Sign-Language-Translation-Towards-Building-a-Sign-Language-Foundation-Model.git mlslt-repro
-cd mlslt-repro
+git clone https://github.com/vaishvan/sign-language-translation.git
+cd sign-language-translation
 brew install ffmpeg
 python3.12 -m venv .venv
 source .venv/bin/activate
@@ -383,7 +383,7 @@ are hosted outside git. We upload slim copies (model weights only, 85 MB each, 5
 | DINOv2 features (`data/features/sp10_dinov2`, 11,741 files, 441 MB zipped as `sp10_dinov2_features.zip`) | n/a | same Drive folder; or rebuild with §3c |
 
 The same checkpoints are also attached to the GitHub release
-[v1.0](https://github.com/joffinkoshy/Multilingual-Gloss-free-Sign-Language-Translation-Towards-Building-a-Sign-Language-Foundation-Model/releases/tag/v1.0) (`mlslt_checkpoints.zip`).
+[v1.0](https://github.com/vaishvan/sign-language-translation/releases/tag/v1.0) (`mlslt_checkpoints.zip`).
 
 To evaluate a downloaded checkpoint, put `best.ckpt` and `txt_vocab.txt` in
 `experiments/<run>/seed<k>/` and run the §5 commands.
