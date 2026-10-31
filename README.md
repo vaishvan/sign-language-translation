@@ -377,9 +377,9 @@ are hosted outside git. We upload slim copies (model weights only, 85 MB each, 5
 
 | Run | Seeds | Checkpoints (`best.ckpt` + `txt_vocab.txt`) |
 |---|---|---|
-| E1 baseline | 1, 2, 3 | [Google Drive folder](https://drive.google.com/drive/folders/1y_Jx64GrD9BbjK2w7Uplpc_t7g8_l9p3?usp=drive_link) (`baseline/seed*/`) |
-| E2 proposed | 1, 2, 3 | [Google Drive folder](https://drive.google.com/drive/folders/1y_Jx64GrD9BbjK2w7Uplpc_t7g8_l9p3?usp=drive_link) (`proposed/seed*/`) |
-| E0 vanilla Transformer | 1 | [Google Drive folder](https://drive.google.com/drive/folders/1y_Jx64GrD9BbjK2w7Uplpc_t7g8_l9p3?usp=drive_link) (`universal/seed*/`) |
+| E1 baseline | 1, 2, 3 | [Google Drive folder](https://drive.google.com/drive/folders/1GDHmRCuSsk4PkI3PsPW10AkkHMKN6zgz?usp=drive_link) (`baseline/seed*/`) |
+| E2 proposed | 1, 2, 3 | [Google Drive folder](https://drive.google.com/drive/folders/1GDHmRCuSsk4PkI3PsPW10AkkHMKN6zgz?usp=drive_link) (`proposed/seed*/`) |
+| E0 vanilla Transformer | 1 | [Google Drive folder](https://drive.google.com/drive/folders/1GDHmRCuSsk4PkI3PsPW10AkkHMKN6zgz?usp=drive_link) (`universal/seed*/`) |
 | DINOv2 features (`data/features/sp10_dinov2`, 11,741 files, 441 MB zipped as `sp10_dinov2_features.zip`) | n/a | same Drive folder; or rebuild with §3c |
 
 The same checkpoints are also attached to the GitHub release
