@@ -21,8 +21,9 @@ features.
 The paper trains one Transformer that translates many sign languages without
 gloss annotations. Its Sign2(LID+Text) model adds a **token-level
 sign-language-ID (LID) head** on the output of the first encoder layer
-(`h_int`), trained with CTC (λ₁). The remaining encoder layers feed a text CTC
-head (λ₂) and an attention decoder (λ₃), with λ = (1, 5, 3).
+($h_{\text{int}}$), trained with CTC ($\lambda_1$). The remaining encoder layers
+feed a text CTC head ($\lambda_2$) and an attention decoder ($\lambda_3$), with
+$\lambda = (1, 5, 3)$.
 
 ### Our novelty: LID self-conditioning
 
@@ -31,43 +32,48 @@ discarded**: encoder layers 2..N never see it. We feed the LID-CTC posterior
 back into the residual stream before the Sign2Text layers. This is the
 self-conditioned CTC idea from Nozaki & Komatsu (Interspeech 2021):
 
-```
-Z      = softmax(W_lid · h_int)                 # [B, |F|, V_lid]; the paper already computes this
-h_int' = h_int + g · W_c · Z,   g = sigmoid(a)   # NEW: W_c ∈ R^{d×V_lid}, scalar gate a
-h_fin  = Enc_{2..N}(h_int')                     # unchanged
-```
+$$
+\begin{aligned}
+Z &= \operatorname{softmax}\!\left(W_{\text{lid}}\, h_{\text{int}}\right) && \in \mathbb{R}^{B \times |F| \times V_{\text{lid}}} \quad \text{(already computed in the paper)} \\
+h_{\text{int}}' &= h_{\text{int}} + g \cdot W_c Z, \qquad g = \sigma(a) && \textbf{NEW: } W_c \in \mathbb{R}^{d \times V_{\text{lid}}},\ a \text{ a scalar gate} \\
+h_{\text{fin}} &= \operatorname{Enc}_{2..N}\!\left(h_{\text{int}}'\right) && \text{unchanged}
+\end{aligned}
+$$
 
-Everything else is identical to the paper: losses, λ, decoder and decoding.
-The conditioner adds **3,585 parameters** (14 × 256 + 1), about 0.02% of our
+Here $\sigma$ is the sigmoid, $B$ the batch size, $|F|$ the number of frames and
+$V_{\text{lid}} = 14$ the LID vocabulary size.
+
+Everything else is identical to the paper: losses, $ambda$, decoder and decoding.
+The conditioner adds **3,585 parameters** ($14 \times 256 + 1$), about 0.02% of our
 18.56M-parameter baseline. That is too small for any gain to come from extra
 capacity.
 
 | | Paper (baseline, E1) | Proposed (E2) |
 |---|---|---|
 | LID_tok prediction | auxiliary loss only | loss **and** input to layers 2..N |
-| Gradient into the LID head | only from L_LID | from L_LID + L_Txt + L_Attn |
-| Effect of LID with few languages | fixed λ₁ = 1, can hurt (paper Table 9) | learnable gate g lets the model down-weight it |
+| Gradient into the LID head | only from $L_{\text{LID}}$ | from $L_{\text{LID}} + L_{\text{Txt}} + L_{\text{Attn}}$ |
+| Effect of LID with few languages | fixed $\lambda_1 = 1$, can hurt (paper Table 9) | learnable gate $g$ lets the model down-weight it |
 | Test-time language information | none | predicted (not oracle) LID posterior |
 
 Why it should help (full argument in
-[PLAN_LID_SELF_CONDITIONING.md](PLAN_LID_SELF_CONDITIONING.md) §2):
-
-These are hypotheses, not proven mechanisms (see §6 for what the results do
-and do not support):
+[PLAN_LID_SELF_CONDITIONING.md](PLAN_LID_SELF_CONDITIONING.md) §2). These are
+hypotheses, not proven mechanisms (see §6 for what the results do and do not
+support):
 
 1. **It makes language identity an explicit input.** Each frame's later layers
    see the model's own language hypothesis, in the spirit of self-conditioned
    CTC.
-2. **It gives soft language-specific sub-networks.** Adding `W_c Z` shifts the
+2. **It gives soft language-specific sub-networks.** Adding $W_c Z$ shifts the
    Q/K/V and FFN inputs of the shared layers per token and per language. This
    reduces interference between languages in the shared weights, which is the
    cause of the paper's universal-training drop (Table 8).
 3. **It makes the auxiliary task cooperate with translation.** In the paper,
-   ∂L_Txt/∂W_lid = 0. With conditioning, the translation losses also train the
-   LID head. As g → 0 the model reduces exactly to the paper's model, so the
-   proposed model contains the baseline.
+   $\partial L_{\text{Txt}} / \partial W_{\text{lid}} = 0$. With conditioning,
+   the translation losses also train the LID head. As $g \to 0$ the model
+   reduces exactly to the paper's model, so the proposed model contains the
+   baseline.
 
-The gate starts at `g = sigmoid(-2) ≈ 0.12`.
+The gate starts at $g = \sigma(-2) \approx 0.12$.
 
 ### Features (deviation from the paper)
 
@@ -75,7 +81,7 @@ The paper uses SlowFastSign features retrained with spoken-text supervision.
 That checkpoint is not public, and retraining it is out of reach on an 8 GB
 Apple M1.
 Instead, **both** models use the same frozen, gloss-free **DINOv2 ViT-S/14
-per-frame CLS embeddings** (d_feat = 384, every 2nd frame, 224×224). The
+per-frame CLS embeddings** ($d_{\text{feat}} = 384$, every 2nd frame, $224 \times 224$). The
 comparison between baseline and proposed is therefore fair, but absolute BLEU
 is **not** expected to match the paper.
 
@@ -113,8 +119,8 @@ python -m pytest tests -q
 
 The test suite has 45 tests and runs on CPU in a few seconds. It covers
 shapes, CTC loss, decoding, gradient flow, a tiny overfit run, and the
-self-conditioning checks: output shape, g → 0 matching the baseline, and the
-L_Attn gradient reaching `lid_head` only when the conditioner is enabled.
+self-conditioning checks: output shape, $g \to 0$ matching the baseline, and the
+$L_{\text{Attn}}$ gradient reaching `lid_head` only when the conditioner is enabled.
 
 **Using MPS:** pass `--device mps` to every training, evaluation and
 extraction command, or set `DEVICE=mps` for the runner script. PyTorch's
@@ -233,14 +239,14 @@ self-conditioning flag.
 | d_model / FFN / heads | 256 / 2048 / 8 | paper App. B (heads: assumption) |
 | Encoder + decoder layers | 6 + 6, LID head after encoder layer 1 | paper |
 | d_feat | 384 (DINOv2 ViT-S/14) | ours |
-| Loss weights λ = (LID, Txt-CTC, Attn) | (1, 5, 3) | paper Eq. 5 |
-| Optimiser | Adam, **lr 1e-4**, β = (0.9, 0.999), eps 1e-8 | **deviation:** the paper's 1e-3 stalled in our code (§6) |
+| Loss weights $\lambda$ = (LID, Txt-CTC, Attn) | $(1, 5, 3)$ | paper Eq. 5 |
+| Optimiser | Adam, **lr $10^{-4}$**, $\beta = (0.9, 0.999)$, $\epsilon = 10^{-8}$ | **deviation:** the paper's $10^{-3}$ stalled in our code (§6) |
 | LR schedule | ReduceLROnPlateau on dev BLEU, patience 10, factor 0.1 | reference code |
 | Batch size | 16 × 2 gradient-accumulation steps = 32 effective | small-memory GPU (paper: 64) |
 | Dropout / grad clip | 0.1 / 5.0 | assumption |
 | Early stopping | 10 epochs without dev-BLEU gain, max 100 epochs | |
 | Decoding | greedy for dev checks and final scores (beam 5 + CTC 0.3 selectable) | chosen on dev (§5) |
-| Self-conditioning gate | init logit −2.0 (g ≈ 0.12), learnable | ours |
+| Self-conditioning gate | init logit $-2.0$ ($g \approx 0.12$), learnable | ours |
 | Seeds | 1, 2, 3 | |
 
 `python -m src.utils.config --assumptions` lists every config field that is an
@@ -441,7 +447,7 @@ Dev set (the same checkpoints, greedy decoding):
   SlowFastSign (see §1), and we report BLEU pooled over all 10 languages while
   the paper averages per language.
 - **Deviations from the paper** (applied equally to E1 and E2): Adam learning rate
-  1e-4 instead of 1e-3 (the paper's value stalled in our implementation: dev BLEU
+  $10^{-4}$ instead of $10^{-3}$ (the paper's value stalled in our implementation: dev BLEU
   0.01 and early stop at epoch 13, log kept in
   `experiments/baseline/seed1_lr1e-3_failed/`); greedy decoding instead of beam
   search with CTC rescoring; DINOv2 features. Each run took about 1.5–2 hours.
@@ -457,7 +463,7 @@ references/                 paper's reference code (Gloss-free-MLSLT) and SP-10 
 scripts/                    CLI entry points (train, evaluate, compare, data prep)
 src/datasets/               SP-10 / PHOENIX14T loaders, tokenizer, feature cache
 src/models/                 model code (see below)
-src/losses/                 CTC and attention losses, joint λ-weighted loss
+src/losses/                 CTC and attention losses, joint lambda-weighted loss
 src/training/               trainer, checkpointing, LR schedulers, run setup
 src/evaluation/             beam search decoding, BLEU / ROUGE metrics
 tests/                      pytest suite (45 tests)
@@ -470,7 +476,7 @@ tests/                      pytest suite (45 tests)
 | `src/models/sign2_lid_text.py` | Sign2(LID+Text): split encoder, LID-CTC head after layer 1, text-CTC head, attention decoder |
 | `src/models/baseline_transformer.py` | vanilla Transformer (E0) |
 | `src/models/layers.py` | Transformer building blocks, masks |
-| `src/losses/` | LID-CTC, text-CTC, attention loss, λ-weighted joint loss |
+| `src/losses/` | LID-CTC, text-CTC, attention loss, $\lambda$-weighted joint loss |
 | `src/evaluation/decode.py`, `metrics.py` | greedy and batched beam search with CTC rescoring (the per-example reference version is kept for tests), SacreBLEU / ROUGE-L |
 | `src/training/`, `scripts/train.py` | training loop, plateau scheduler, early stopping on dev BLEU |
 | `scripts/convert_sp10_index.py`, `src/datasets/sp10.py` | SP-10 data |
@@ -480,11 +486,11 @@ tests/                      pytest suite (45 tests)
 
 | File | Contents |
 |---|---|
-| **`src/models/lid_self_conditioning.py`** | `LIDSelfConditioner`: `h_int + sigmoid(a) · W_c · exp(lid_log_probs)` |
+| **`src/models/lid_self_conditioning.py`** | `LIDSelfConditioner`: $h_{\text{int}} + \sigma(a)\, W_c \exp(\texttt{lid\_log\_probs})$ |
 | **`src/models/sign2_lid_text.py`** | the only hook: optional `lid_conditioner=` constructor argument, applied to `h_int` in `encode()` after the LID head. The default `None` gives the paper's model unchanged |
 | **`src/models/build.py`** | builds the conditioner from `config.lid_self_conditioning` (`enabled`, `gate_init`, `learn_gate`) |
 | `configs/proposed_lid_selfcond.yaml` | the E2 config |
-| `tests/test_lid_self_conditioning.py` | shape, g → 0 equivalence with the baseline, and gradient-path tests |
+| `tests/test_lid_self_conditioning.py` | shape, $g \to 0$ equivalence with the baseline, and gradient-path tests |
 
 ### Shared pipeline for this project
 
