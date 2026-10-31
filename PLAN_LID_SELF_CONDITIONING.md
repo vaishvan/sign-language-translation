@@ -138,4 +138,4 @@ Go/no-go checkpoints:
 - [ ] E1 ×3, E2 ×3 trained; checkpoints + logs uploaded (Google Drive / HF Hub, public link)
 - [ ] `README.md` covering the 7 required sections
 - [ ] One-page report in the provided LaTeX template (need template ZIP + team details)
-- [ ] `TeamXX_26_DLCV_Project_Report.pdf`
+- [ ] `TeamXX_Project_Report.pdf`

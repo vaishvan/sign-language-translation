@@ -1,6 +1,6 @@
 # LID Self-Conditioning for Multilingual Gloss-free Sign Language Translation
 
-Course project for **DA 6021 Deep Learning for Computer Vision**.
+Course project for **Natural Language Processing**.
 
 We reproduce the Sign2(LID+Text) model from the paper below and test one
 change to it, **LID self-conditioning**. Both models are trained on SP-10

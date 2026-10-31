@@ -1,5 +1,5 @@
 === eval baseline seed 1 dev ===
-/Users/apple/Projects/DLCV/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/functional.py:3159: UserWarning: The operator 'aten::_ctc_loss' is not currently supported on the MPS backend and will fall back to run on the CPU. This may have performance implications. (Triggered internally at /Users/runner/work/pytorch/pytorch/aten/src/ATen/mps/MPSFallback.mm:34.)
+/Users/apple/Projects/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/functional.py:3159: UserWarning: The operator 'aten::_ctc_loss' is not currently supported on the MPS backend and will fall back to run on the CPU. This may have performance implications. (Triggered internally at /Users/runner/work/pytorch/pytorch/aten/src/ATen/mps/MPSFallback.mm:34.)
   return torch.ctc_loss(
 {
   "split": "dev",
@@ -18,9 +18,9 @@
 === train proposed seed 1 (configs/proposed_lid_selfcond.yaml) ===
 2026-10-26 22:45:07,023 INFO mlslt: run info: {"config": "configs/proposed_lid_selfcond.yaml", "language_pairs": [["csl", "en"], ["ukl", "en"], ["rsl", "en"], ["icl", "en"], ["gsg", "en"], ["ise", "en"], ["bqn", "en"], ["swl", "en"], ["lls", "en"], ["bfi", "en"]], "language_pair": null, "n_train": 8300, "n_dev": 1420, "txt_vocab_size": 1417, "stub_features": false, "trainable_params": 18559777}
 INFO:mlslt:run info: {"config": "configs/proposed_lid_selfcond.yaml", "language_pairs": [["csl", "en"], ["ukl", "en"], ["rsl", "en"], ["icl", "en"], ["gsg", "en"], ["ise", "en"], ["bqn", "en"], ["swl", "en"], ["lls", "en"], ["bfi", "en"]], "language_pair": null, "n_train": 8300, "n_dev": 1420, "txt_vocab_size": 1417, "stub_features": false, "trainable_params": 18559777}
-/Users/apple/Projects/DLCV/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py:1336: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+/Users/apple/Projects/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py:1336: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
   key_padding_mask = F._canonical_mask(
-/Users/apple/Projects/DLCV/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/functional.py:3159: UserWarning: The operator 'aten::_ctc_loss' is not currently supported on the MPS backend and will fall back to run on the CPU. This may have performance implications. (Triggered internally at /Users/runner/work/pytorch/pytorch/aten/src/ATen/mps/MPSFallback.mm:34.)
+/Users/apple/Projects/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/functional.py:3159: UserWarning: The operator 'aten::_ctc_loss' is not currently supported on the MPS backend and will fall back to run on the CPU. This may have performance implications. (Triggered internally at /Users/runner/work/pytorch/pytorch/aten/src/ATen/mps/MPSFallback.mm:34.)
   return torch.ctc_loss(
 2026-10-26 22:47:21,184 INFO mlslt: epoch 1: mean total loss 129.6884
 INFO:mlslt:epoch 1: mean total loss 129.6884
@@ -265,7 +265,7 @@ INFO:mlslt:epoch 40: dev BLEU 4.54 (best so far 4.79)
 2026-10-27 00:26:11,854 INFO mlslt: early stopping at epoch 40 (no dev-BLEU improvement for 10 epochs)
 INFO:mlslt:early stopping at epoch 40 (no dev-BLEU improvement for 10 epochs)
 === eval proposed seed 1 dev ===
-/Users/apple/Projects/DLCV/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/functional.py:3159: UserWarning: The operator 'aten::_ctc_loss' is not currently supported on the MPS backend and will fall back to run on the CPU. This may have performance implications. (Triggered internally at /Users/runner/work/pytorch/pytorch/aten/src/ATen/mps/MPSFallback.mm:34.)
+/Users/apple/Projects/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/functional.py:3159: UserWarning: The operator 'aten::_ctc_loss' is not currently supported on the MPS backend and will fall back to run on the CPU. This may have performance implications. (Triggered internally at /Users/runner/work/pytorch/pytorch/aten/src/ATen/mps/MPSFallback.mm:34.)
   return torch.ctc_loss(
 {
   "split": "dev",
@@ -284,7 +284,7 @@ INFO:mlslt:early stopping at epoch 40 (no dev-BLEU improvement for 10 epochs)
   "selfcond_params": 3585
 }
 === eval proposed seed 1 test ===
-/Users/apple/Projects/DLCV/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/functional.py:3159: UserWarning: The operator 'aten::_ctc_loss' is not currently supported on the MPS backend and will fall back to run on the CPU. This may have performance implications. (Triggered internally at /Users/runner/work/pytorch/pytorch/aten/src/ATen/mps/MPSFallback.mm:34.)
+/Users/apple/Projects/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/functional.py:3159: UserWarning: The operator 'aten::_ctc_loss' is not currently supported on the MPS backend and will fall back to run on the CPU. This may have performance implications. (Triggered internally at /Users/runner/work/pytorch/pytorch/aten/src/ATen/mps/MPSFallback.mm:34.)
   return torch.ctc_loss(
 {
   "split": "test",
@@ -305,9 +305,9 @@ INFO:mlslt:early stopping at epoch 40 (no dev-BLEU improvement for 10 epochs)
 === train baseline seed 2 (configs/sp10_m2o_dinov2.yaml) ===
 2026-10-27 00:28:17,171 INFO mlslt: run info: {"config": "configs/sp10_m2o_dinov2.yaml", "language_pairs": [["csl", "en"], ["ukl", "en"], ["rsl", "en"], ["icl", "en"], ["gsg", "en"], ["ise", "en"], ["bqn", "en"], ["swl", "en"], ["lls", "en"], ["bfi", "en"]], "language_pair": null, "n_train": 8300, "n_dev": 1420, "txt_vocab_size": 1417, "stub_features": false, "trainable_params": 18556192}
 INFO:mlslt:run info: {"config": "configs/sp10_m2o_dinov2.yaml", "language_pairs": [["csl", "en"], ["ukl", "en"], ["rsl", "en"], ["icl", "en"], ["gsg", "en"], ["ise", "en"], ["bqn", "en"], ["swl", "en"], ["lls", "en"], ["bfi", "en"]], "language_pair": null, "n_train": 8300, "n_dev": 1420, "txt_vocab_size": 1417, "stub_features": false, "trainable_params": 18556192}
-/Users/apple/Projects/DLCV/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py:1336: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+/Users/apple/Projects/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py:1336: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
   key_padding_mask = F._canonical_mask(
-/Users/apple/Projects/DLCV/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/functional.py:3159: UserWarning: The operator 'aten::_ctc_loss' is not currently supported on the MPS backend and will fall back to run on the CPU. This may have performance implications. (Triggered internally at /Users/runner/work/pytorch/pytorch/aten/src/ATen/mps/MPSFallback.mm:34.)
+/Users/apple/Projects/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/functional.py:3159: UserWarning: The operator 'aten::_ctc_loss' is not currently supported on the MPS backend and will fall back to run on the CPU. This may have performance implications. (Triggered internally at /Users/runner/work/pytorch/pytorch/aten/src/ATen/mps/MPSFallback.mm:34.)
   return torch.ctc_loss(
 2026-10-27 00:30:33,473 INFO mlslt: epoch 1: mean total loss 125.5380
 INFO:mlslt:epoch 1: mean total loss 125.5380
@@ -502,9 +502,9 @@ INFO:mlslt:early stopping at epoch 39 (no dev-BLEU improvement for 10 epochs)
 === train proposed seed 2 (configs/proposed_lid_selfcond.yaml) ===
 2026-10-27 02:11:21,370 INFO mlslt: run info: {"config": "configs/proposed_lid_selfcond.yaml", "language_pairs": [["csl", "en"], ["ukl", "en"], ["rsl", "en"], ["icl", "en"], ["gsg", "en"], ["ise", "en"], ["bqn", "en"], ["swl", "en"], ["lls", "en"], ["bfi", "en"]], "language_pair": null, "n_train": 8300, "n_dev": 1420, "txt_vocab_size": 1417, "stub_features": false, "trainable_params": 18559777}
 INFO:mlslt:run info: {"config": "configs/proposed_lid_selfcond.yaml", "language_pairs": [["csl", "en"], ["ukl", "en"], ["rsl", "en"], ["icl", "en"], ["gsg", "en"], ["ise", "en"], ["bqn", "en"], ["swl", "en"], ["lls", "en"], ["bfi", "en"]], "language_pair": null, "n_train": 8300, "n_dev": 1420, "txt_vocab_size": 1417, "stub_features": false, "trainable_params": 18559777}
-/Users/apple/Projects/DLCV/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py:1336: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+/Users/apple/Projects/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py:1336: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
   key_padding_mask = F._canonical_mask(
-/Users/apple/Projects/DLCV/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/functional.py:3159: UserWarning: The operator 'aten::_ctc_loss' is not currently supported on the MPS backend and will fall back to run on the CPU. This may have performance implications. (Triggered internally at /Users/runner/work/pytorch/pytorch/aten/src/ATen/mps/MPSFallback.mm:34.)
+/Users/apple/Projects/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/functional.py:3159: UserWarning: The operator 'aten::_ctc_loss' is not currently supported on the MPS backend and will fall back to run on the CPU. This may have performance implications. (Triggered internally at /Users/runner/work/pytorch/pytorch/aten/src/ATen/mps/MPSFallback.mm:34.)
   return torch.ctc_loss(
 2026-10-27 02:13:32,084 INFO mlslt: epoch 1: mean total loss 130.5607
 INFO:mlslt:epoch 1: mean total loss 130.5607
@@ -805,9 +805,9 @@ INFO:mlslt:early stopping at epoch 43 (no dev-BLEU improvement for 10 epochs)
 === train baseline seed 3 (configs/sp10_m2o_dinov2.yaml) ===
 2026-10-27 03:59:07,227 INFO mlslt: run info: {"config": "configs/sp10_m2o_dinov2.yaml", "language_pairs": [["csl", "en"], ["ukl", "en"], ["rsl", "en"], ["icl", "en"], ["gsg", "en"], ["ise", "en"], ["bqn", "en"], ["swl", "en"], ["lls", "en"], ["bfi", "en"]], "language_pair": null, "n_train": 8300, "n_dev": 1420, "txt_vocab_size": 1417, "stub_features": false, "trainable_params": 18556192}
 INFO:mlslt:run info: {"config": "configs/sp10_m2o_dinov2.yaml", "language_pairs": [["csl", "en"], ["ukl", "en"], ["rsl", "en"], ["icl", "en"], ["gsg", "en"], ["ise", "en"], ["bqn", "en"], ["swl", "en"], ["lls", "en"], ["bfi", "en"]], "language_pair": null, "n_train": 8300, "n_dev": 1420, "txt_vocab_size": 1417, "stub_features": false, "trainable_params": 18556192}
-/Users/apple/Projects/DLCV/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py:1336: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+/Users/apple/Projects/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py:1336: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
   key_padding_mask = F._canonical_mask(
-/Users/apple/Projects/DLCV/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/functional.py:3159: UserWarning: The operator 'aten::_ctc_loss' is not currently supported on the MPS backend and will fall back to run on the CPU. This may have performance implications. (Triggered internally at /Users/runner/work/pytorch/pytorch/aten/src/ATen/mps/MPSFallback.mm:34.)
+/Users/apple/Projects/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/functional.py:3159: UserWarning: The operator 'aten::_ctc_loss' is not currently supported on the MPS backend and will fall back to run on the CPU. This may have performance implications. (Triggered internally at /Users/runner/work/pytorch/pytorch/aten/src/ATen/mps/MPSFallback.mm:34.)
   return torch.ctc_loss(
 2026-10-27 04:01:21,611 INFO mlslt: epoch 1: mean total loss 125.7805
 INFO:mlslt:epoch 1: mean total loss 125.7805
@@ -986,9 +986,9 @@ INFO:mlslt:early stopping at epoch 35 (no dev-BLEU improvement for 10 epochs)
 === train proposed seed 3 (configs/proposed_lid_selfcond.yaml) ===
 2026-10-27 05:25:26,934 INFO mlslt: run info: {"config": "configs/proposed_lid_selfcond.yaml", "language_pairs": [["csl", "en"], ["ukl", "en"], ["rsl", "en"], ["icl", "en"], ["gsg", "en"], ["ise", "en"], ["bqn", "en"], ["swl", "en"], ["lls", "en"], ["bfi", "en"]], "language_pair": null, "n_train": 8300, "n_dev": 1420, "txt_vocab_size": 1417, "stub_features": false, "trainable_params": 18559777}
 INFO:mlslt:run info: {"config": "configs/proposed_lid_selfcond.yaml", "language_pairs": [["csl", "en"], ["ukl", "en"], ["rsl", "en"], ["icl", "en"], ["gsg", "en"], ["ise", "en"], ["bqn", "en"], ["swl", "en"], ["lls", "en"], ["bfi", "en"]], "language_pair": null, "n_train": 8300, "n_dev": 1420, "txt_vocab_size": 1417, "stub_features": false, "trainable_params": 18559777}
-/Users/apple/Projects/DLCV/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py:1336: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+/Users/apple/Projects/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py:1336: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
   key_padding_mask = F._canonical_mask(
-/Users/apple/Projects/DLCV/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/functional.py:3159: UserWarning: The operator 'aten::_ctc_loss' is not currently supported on the MPS backend and will fall back to run on the CPU. This may have performance implications. (Triggered internally at /Users/runner/work/pytorch/pytorch/aten/src/ATen/mps/MPSFallback.mm:34.)
+/Users/apple/Projects/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/functional.py:3159: UserWarning: The operator 'aten::_ctc_loss' is not currently supported on the MPS backend and will fall back to run on the CPU. This may have performance implications. (Triggered internally at /Users/runner/work/pytorch/pytorch/aten/src/ATen/mps/MPSFallback.mm:34.)
   return torch.ctc_loss(
 2026-10-27 05:27:48,644 INFO mlslt: epoch 1: mean total loss 129.9042
 INFO:mlslt:epoch 1: mean total loss 129.9042
@@ -1427,11 +1427,11 @@ INFO:mlslt:early stopping at epoch 66 (no dev-BLEU improvement for 10 epochs)
 === train universal seed 1 (configs/sp10_m2o_dinov2_universal.yaml) ===
 2026-10-27 08:20:42,797 INFO mlslt: run info: {"config": "configs/sp10_m2o_dinov2_universal.yaml", "language_pairs": [["csl", "en"], ["ukl", "en"], ["rsl", "en"], ["icl", "en"], ["gsg", "en"], ["ise", "en"], ["bqn", "en"], ["swl", "en"], ["lls", "en"], ["bfi", "en"]], "language_pair": null, "n_train": 8300, "n_dev": 1420, "txt_vocab_size": 1417, "stub_features": false, "trainable_params": 18188425}
 INFO:mlslt:run info: {"config": "configs/sp10_m2o_dinov2_universal.yaml", "language_pairs": [["csl", "en"], ["ukl", "en"], ["rsl", "en"], ["icl", "en"], ["gsg", "en"], ["ise", "en"], ["bqn", "en"], ["swl", "en"], ["lls", "en"], ["bfi", "en"]], "language_pair": null, "n_train": 8300, "n_dev": 1420, "txt_vocab_size": 1417, "stub_features": false, "trainable_params": 18188425}
-/Users/apple/Projects/DLCV/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py:1336: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+/Users/apple/Projects/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/modules/activation.py:1336: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
   key_padding_mask = F._canonical_mask(
 2026-10-27 08:22:46,755 INFO mlslt: epoch 1: mean total loss 30.5979
 INFO:mlslt:epoch 1: mean total loss 30.5979
-/Users/apple/Projects/DLCV/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/modules/transformer.py:529: UserWarning: The PyTorch API of nested tensors is in prototype stage and will change in the near future. We recommend specifying layout=torch.jagged when constructing a nested tensor, as this layout receives active development, has better operator coverage, and works with torch.compile. (Triggered internally at /Users/runner/work/pytorch/pytorch/aten/src/ATen/NestedTensorImpl.cpp:181.)
+/Users/apple/Projects/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/modules/transformer.py:529: UserWarning: The PyTorch API of nested tensors is in prototype stage and will change in the near future. We recommend specifying layout=torch.jagged when constructing a nested tensor, as this layout receives active development, has better operator coverage, and works with torch.compile. (Triggered internally at /Users/runner/work/pytorch/pytorch/aten/src/ATen/NestedTensorImpl.cpp:181.)
   output = torch._nested_tensor_from_mask(
 2026-10-27 08:22:56,072 INFO mlslt: epoch 1: dev BLEU 0.18 (best so far 0.18)
 INFO:mlslt:epoch 1: dev BLEU 0.18 (best so far 0.18)
@@ -1630,7 +1630,7 @@ INFO:mlslt:epoch 49: dev BLEU 4.49 (best so far 5.18)
 2026-10-27 10:11:06,280 INFO mlslt: early stopping at epoch 49 (no dev-BLEU improvement for 10 epochs)
 INFO:mlslt:early stopping at epoch 49 (no dev-BLEU improvement for 10 epochs)
 === eval universal seed 1 dev ===
-/Users/apple/Projects/DLCV/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/modules/transformer.py:480: UserWarning: The operator 'aten::_nested_tensor_from_mask_left_aligned' is not currently supported on the MPS backend and will fall back to run on the CPU. This may have performance implications. (Triggered internally at /Users/runner/work/pytorch/pytorch/aten/src/ATen/mps/MPSFallback.mm:34.)
+/Users/apple/Projects/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/modules/transformer.py:480: UserWarning: The operator 'aten::_nested_tensor_from_mask_left_aligned' is not currently supported on the MPS backend and will fall back to run on the CPU. This may have performance implications. (Triggered internally at /Users/runner/work/pytorch/pytorch/aten/src/ATen/mps/MPSFallback.mm:34.)
   elif do_mask_check and not torch._nested_tensor_from_mask_left_aligned(
 {
   "split": "dev",
@@ -1645,7 +1645,7 @@ INFO:mlslt:early stopping at epoch 49 (no dev-BLEU improvement for 10 epochs)
   "trainable_params": 18188425
 }
 === eval universal seed 1 test ===
-/Users/apple/Projects/DLCV/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/modules/transformer.py:480: UserWarning: The operator 'aten::_nested_tensor_from_mask_left_aligned' is not currently supported on the MPS backend and will fall back to run on the CPU. This may have performance implications. (Triggered internally at /Users/runner/work/pytorch/pytorch/aten/src/ATen/mps/MPSFallback.mm:34.)
+/Users/apple/Projects/mlslt-repro/.venv/lib/python3.12/site-packages/torch/nn/modules/transformer.py:480: UserWarning: The operator 'aten::_nested_tensor_from_mask_left_aligned' is not currently supported on the MPS backend and will fall back to run on the CPU. This may have performance implications. (Triggered internally at /Users/runner/work/pytorch/pytorch/aten/src/ATen/mps/MPSFallback.mm:34.)
   elif do_mask_check and not torch._nested_tensor_from_mask_left_aligned(
 {
   "split": "test",
