@@ -7,6 +7,11 @@ change to it, **LID self-conditioning**. Both models are trained on SP-10
 many-to-one (10 sign languages → English) using the same frozen DINOv2 frame
 features.
 
+**Interactive demo:** a local web page where you press *Run* on a sign-language
+video and watch the trained model translate it live, one clip per sign
+language. Setup takes a few minutes and needs no GPU (see
+[§5 Interactive demo](#interactive-demo)).
+
 ---
 
 ## 1. Project overview
@@ -363,6 +368,65 @@ Both contain BLEU and ROUGE-L as mean ± std over seeds, per-language BLEU,
 and a paired bootstrap test (Koehn 2004, `--bootstrap-samples 1000`) on
 corpus BLEU for each matched seed pair. The test reports Δ, a 95% CI and p.
 
+### Interactive demo
+
+A local web page that shows the trained model working, live. It has one SP-10
+**dev or test** clip for each of the 10 sign languages, so none of these
+sentences were seen in training. Each card shows the sign video, the expected English
+sentence, and a **Run** button. *Run* sends that video through the real
+pipeline on your machine (DINOv2 features → proposed model, seed 3 → greedy
+decoding) and shows:
+
+- the model's English translation,
+- its guess of the sign language (from the LID head),
+- the number of frames and how long the run took.
+
+In the top 8 clips the model gets the meaning right (for example "See you." →
+"See you later!", "What kind of work do you do?" → "What kind of job do you
+do?"). These are hand-picked from its best dev/test results: no dev or test
+output is word-for-word correct, because the model can only answer with
+sentences it saw in training. The bottom 2 (Russian, Bulgarian) are partial
+results with one key word wrong ("last month" → "last year", "an 'A'" →
+"a 'C'"). On a typical clip the model is less accurate (test BLEU 3.6, §6).
+
+**Setup** (after the environment in §2; no dataset or features needed):
+
+1. Download `mlslt_checkpoints.zip` from the
+   [v1.0 release](https://github.com/vaishvan/sign-language-translation/releases/tag/v1.0)
+   and unzip the proposed seed-3 model into `demo/ckpt/`:
+   ```bash
+   mkdir -p demo/ckpt
+   unzip mlslt_checkpoints.zip 'proposed/seed3/*' -d demo/ckpt/
+   ```
+   On Windows: `tar -xf mlslt_checkpoints.zip -C demo\ckpt proposed/seed3`.
+2. Start the demo server:
+   ```bash
+   python scripts/demo_app.py
+   ```
+   On first start it downloads the 10 clips from SpreadTheSign into
+   `demo/videos/` and DINOv2 through `torch.hub` (84 MB), so it needs internet
+   once. It then loads the model and prints `demo ready`.
+3. Open <http://localhost:8765> and press **Run** on any clip, or **Run all**.
+
+Each run takes about 5–15 s on a laptop CPU (`--device cuda` or `--device mps`
+is faster). Other options: `--port`, `--model-dir` (for example
+`demo/ckpt/baseline/seed1`, with `--config configs/sp10_m2o_dinov2.yaml`) and
+`--config`. The clips are listed in
+[scripts/demo_clips.json](scripts/demo_clips.json). Outputs can differ slightly
+from `experiments/*/eval_test/hypotheses.tsv`, because features are extracted
+fresh from the video on every run.
+
+To translate any single video from the command line instead:
+
+```bash
+python scripts/translate_video.py demo/videos/23825_is.mp4 --config configs/proposed_lid_selfcond.yaml --model-dir demo/ckpt/proposed/seed3
+```
+
+The model only works on SpreadTheSign-style clips (one signer, plain
+background, one of the 10 SP-10 sign languages). On other sources, such as
+other sign dictionaries, PHOENIX-14T or CSL-Daily, it produces unrelated
+sentences and usually cannot name the sign language either.
+
 ---
 
 ## 6. Checkpoints and results
@@ -502,6 +566,9 @@ tests/                      pytest suite (45 tests)
   `scripts/run_main_experiments.sh`: evaluation and comparison.
 - `scripts/patches/sp10_video_converter_windows.py`: fix for SP-10's
   converter on Windows (not needed on macOS).
+- `scripts/demo_app.py`, `scripts/demo_clips.json`: the interactive demo (§5).
+  `scripts/translate_video.py`: translate one video from the command line.
+  Downloaded clips and checkpoints go in `demo/`, which is git-ignored.
 
 ### Not part of the reported project
 

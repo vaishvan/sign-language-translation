@@ -1,0 +1,92 @@
+[
+  {
+    "id": "8841_uk",
+    "split": "dev",
+    "sign_language": "ukl",
+    "name": "Ukrainian Sign Language",
+    "expected": "I'll see you later.",
+    "kind": "good",
+    "video_url": "https://media.spreadthesign.com/video/mp4/31/116715.mp4"
+  },
+  {
+    "id": "12077_de",
+    "split": "dev",
+    "sign_language": "gsg",
+    "name": "German Sign Language",
+    "expected": "Answer the phone.",
+    "kind": "good",
+    "video_url": "https://media.spreadthesign.com/video/mp4/9/172835.mp4"
+  },
+  {
+    "id": "8840_sv",
+    "split": "test",
+    "sign_language": "swl",
+    "name": "Swedish Sign Language",
+    "expected": "I will be back.",
+    "kind": "good",
+    "video_url": "https://media.spreadthesign.com/video/mp4/2/476085.mp4"
+  },
+  {
+    "id": "22399_it",
+    "split": "test",
+    "sign_language": "ise",
+    "name": "Italian Sign Language",
+    "expected": "I caught a cold.",
+    "kind": "good",
+    "video_url": "https://media.spreadthesign.com/video/mp4/17/462647.mp4"
+  },
+  {
+    "id": "9830_lt",
+    "split": "test",
+    "sign_language": "lls",
+    "name": "Lithuanian Sign Language",
+    "expected": "What kind of work do you do?",
+    "kind": "good",
+    "video_url": "https://media.spreadthesign.com/video/mp4/3/601642.mp4"
+  },
+  {
+    "id": "23825_en",
+    "split": "test",
+    "sign_language": "bfi",
+    "name": "British Sign Language",
+    "expected": "Where is the next bus stop?",
+    "kind": "good",
+    "video_url": "https://media.spreadthesign.com/video/mp4/1/300488.mp4"
+  },
+  {
+    "id": "12077_is",
+    "split": "dev",
+    "sign_language": "icl",
+    "name": "Icelandic Sign Language",
+    "expected": "Answer the phone.",
+    "kind": "good",
+    "video_url": "https://media.spreadthesign.com/video/mp4/21/173337.mp4"
+  },
+  {
+    "id": "1746_zh",
+    "split": "dev",
+    "sign_language": "csl",
+    "name": "Chinese Sign Language",
+    "expected": "See you.",
+    "kind": "good",
+    "video_url": "https://media.spreadthesign.com/video/mp4/35/357741.mp4"
+  },
+  {
+    "id": "9945_ru",
+    "split": "dev",
+    "sign_language": "rsl",
+    "name": "Russian Sign Language",
+    "expected": "My father passed away last month.",
+    "kind": "partial",
+    "video_url": "https://media.spreadthesign.com/video/mp4/12/112420.mp4"
+  },
+  {
+    "id": "9644_bg",
+    "split": "dev",
+    "sign_language": "bqn",
+    "name": "Bulgarian Sign Language",
+    "expected": "I got an 'A' on my paper.",
+    "kind": "partial",
+    "video_url": "https://media.spreadthesign.com/video/mp4/32/581959.mp4"
+  }
+]
