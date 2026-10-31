@@ -487,7 +487,7 @@ tests/                      pytest suite (45 tests)
 
 | File | Contents |
 |---|---|
-| **`src/models/lid_self_conditioning.py`** | `LIDSelfConditioner`: $h_{\text{int}} + \sigma(a)\, W_c \exp(\texttt{lid\_log\_probs})$ |
+| **`src/models/lid_self_conditioning.py`** | `LIDSelfConditioner`: `h_int + sigmoid(a) * W_c * exp(lid_log_probs)` |
 | **`src/models/sign2_lid_text.py`** | the only hook: optional `lid_conditioner=` constructor argument, applied to `h_int` in `encode()` after the LID head. The default `None` gives the paper's model unchanged |
 | **`src/models/build.py`** | builds the conditioner from `config.lid_self_conditioning` (`enabled`, `gate_init`, `learn_gate`) |
 | `configs/proposed_lid_selfcond.yaml` | the E2 config |
